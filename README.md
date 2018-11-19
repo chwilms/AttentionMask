@@ -59,18 +59,36 @@ Download the `train2014` and `val2014` splits from [COCO dataset](http://cocodat
 
 ```
 AttentionMask
--> data
-   -> coco
-      -> annotations
-         | some annotation files
-      -> train2014
-         | image files
-      -> val2014
-         | image files
+|
+---- data
+     |
+     ---- coco
+          |
+          ---- annotations
+          |    |
+          |    ---- instances_train2014.json
+          |    |
+          |    ---- instances_val2014.json
+          |
+          ---- train2014
+          |    |
+          |    ---- COCO_train2014_000000000009.jpg
+          |    |
+          |    ---- ...
+          |
+          ---- val2014
+               |
+               ---- COCO_val2014_000000000042.jpg
+               |
+               ---- ...
 ```
 
 ## Download weights
-For inference, you have to download the model weights for the final AttentionMask model from our [webpage](https://fiona.uni-hamburg.de/f746e4ae/attentionmask-8-128final.caffemodel). If you want to do training yourself, download the [initial ImageNet weights for the ResNet](https://fiona.uni-hamburg.de/f746e4ae/resnet-50-model.caffemodel). Both files should be moved into the `params` subdirectory.
+For inference, you have to download the model weights for one of the final AttentionMask models: [AttentionMask-8-128](https://fiona.uni-hamburg.de/f746e4ae/attentionmask-8-128final.caffemodel), [AttentionMask-8-192](https://fiona.uni-hamburg.de/f746e4ae/attentionmask-8-192final.caffemodel), [AttentionMask-16-192](https://fiona.uni-hamburg.de/f746e4ae/attentionmask-16-192final.caffemodel)
+
+If you want to do training yourself, download the [initial ImageNet weights for the ResNet](https://fiona.uni-hamburg.de/f746e4ae/resnet-50-model.caffemodel). Weight files should be moved into the `params` subdirectory.
+
+
 
 ## Inference
 There are two options for inference. You can either generate proposals for the COCO dataset (or any other dataset following that format) or you can generate proposals for one image.
