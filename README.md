@@ -3,6 +3,8 @@
 
 We propose a novel approach for class-agnostic object proposal generation, which is efficient and especially well-suited to detect small objects. Efficiency is achieved by scale-specific objectness attention maps which focus the processing on promising parts of the image and reduce the amount of sampled windows strongly. This leads to a system, which is 33% faster than the state-of-the-art and clearly outperforming state-of-the-art in terms of average recall. Secondly, we add a module for detecting small objects, which are often missed by recent models. We show that this module improves the average recall for small objects by about 53%.
 
+![Example](/example.png)
+
 The system is based on [FastMask](https://arxiv.org/abs/1612.08843).
 
 If you find this software useful in your research, please cite our paper.
