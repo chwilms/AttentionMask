@@ -14,5 +14,4 @@ average_loss: 79999
 momentum: 0.9
 weight_decay: 0.00005
 snapshot: 80000
-# We still use the snapshot prefix, though
 snapshot_prefix: "params/attentionMask-8-128"
