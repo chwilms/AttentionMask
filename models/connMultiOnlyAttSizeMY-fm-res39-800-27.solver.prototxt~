@@ -1,0 +1,12 @@
+train_net: "models/connMultiOnlyAttSizeMY-fm-res39-800-16.train.prototxt"
+base_lr: .00001
+lr_policy: "step"
+gamma: 0.1
+stepsize: 4000000
+display: 7999
+average_loss: 7999
+momentum: 0.9
+weight_decay: 0.00005
+snapshot: 80000
+# We still use the snapshot prefix, though
+snapshot_prefix: "params/connMultiOnlyAttSizeMY-fm-res39-800-16"

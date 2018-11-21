@@ -1,0 +1,14 @@
+{
+  "RGB_MEAN": [123.68, 116.779, 103.939],
+  "IMAGE_PATH_FORMAT": "data/coco/images/%s/%s",
+  "IMAGE_NAME_FORMAT": "COCO_%s_%012d.jpg",
+  "IMAGE_SET": "train2014",
+  "ANNOTATION_TYPE": "train2014",
+  "ANNOTATION_FILE_FORMAT": "data/coco/annotations/instances_%s.json",
+  "SLIDING_WINDOW_SIZE": 10,
+  "CENTER_RATIO": 0.5,
+  "UPPER_BOUND_RATIO": 0.7,
+  "LOWER_BOUND_RATIO": 0.25,
+  "MASK_SIZE": 40
+}
+

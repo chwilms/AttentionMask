@@ -1,0 +1,125 @@
+##### sample windows######
+
+layer { name: "conv_feat_1_16s" type: "Convolution" bottom: "res4f" top: "conv_feat_1_16s"
+  param { name: "conv_feat_1" lr_mult: 1 } 
+  convolution_param { num_output: 128 pad: 0 kernel_size: 1 weight_filler: { type: 'gaussian' std: 0.001 } bias_term: false } }
+
+layer { name: "extractor_16" type: "SlidingWindow" bottom: "conv_feat_1_16s" top: "sample_16s"
+  sliding_window_param { window_h: 4 window_w: 4 }}
+
+layer { name: "conv_feat_1_32s" type: "Convolution" bottom: "sum_32s" top: "conv_feat_1_32s"
+  param { name: "conv_feat_1" lr_mult: 1 }
+  convolution_param { num_output: 128 pad: 0 kernel_size: 1 weight_filler: { type: 'gaussian' std: 0.001 } bias_term: false } }
+
+layer { name: "extractor_32" type: "SlidingWindow" bottom: "conv_feat_1_32s" top: "sample_32s"
+  sliding_window_param { window_h: 4 window_w: 4 }}
+
+layer { name: "conv_feat_1_64s" type: "Convolution" bottom: "sum_64s" top: "conv_feat_1_64s"
+  param { name: "conv_feat_1" lr_mult: 1 }
+  convolution_param { num_output: 128 pad: 0 kernel_size: 1 weight_filler: { type: 'gaussian' std: 0.001 } bias_term: false } }
+
+layer { name: "extractor_64" type: "SlidingWindow" bottom: "conv_feat_1_64s" top: "sample_64s"
+  sliding_window_param { window_h: 4 window_w: 4 }}
+
+layer { name: "conv_feat_1_128s" type: "Convolution" bottom: "sum_128s" top: "conv_feat_1_128s"
+  param { name: "conv_feat_1" lr_mult: 1 }
+  convolution_param { num_output: 128 pad: 0 kernel_size: 1 weight_filler: { type: 'gaussian' std: 0.001 } bias_term: false } }
+
+layer { name: "extractor_128" type: "SlidingWindow" bottom: "conv_feat_1_128s"   top: "sample_128s"
+  sliding_window_param { window_h: 4 window_w: 4 }}
+
+layer { name: "sample_concat" type: "Concat"
+  bottom: "sample_16s"  bottom: "sample_32s"
+  bottom: "sample_64s" bottom: "sample_128s" 
+top: "sample"
+  concat_param { concat_dim: 0 } }
+
+layer{
+  type: "Silence"
+  bottom: "obj16_flags"
+  bottom: "obj32_flags"
+  bottom: "obj64_flags"
+  bottom: "obj128_flags"
+}
+
+layer { bottom: "sample" top: "sample_bn" type: "BatchNorm" name:"sample_bn" batch_norm_param { use_global_stats: false } 
+  param { lr_mult: 0 decay_mult: 0 } param { lr_mult: 0 decay_mult: 0 } param { lr_mult: 0 decay_mult: 0 } }
+layer { bottom: "sample_bn" top: "sample_s" type: "Scale" name: "sample_scale" scale_param { bias_term: true } 
+  param { lr_mult: 1 decay_mult: 0 } param { lr_mult: 1 decay_mult: 0} }
+
+######### cls branch ##########
+
+layer { name: 'cls_1' type: 'InnerProduct' bottom: 'sample' top: 'cls_1'
+    param { lr_mult: 1.0 } param { lr_mult: 1.0 }
+    inner_product_param { num_output: 512 weight_filler: { type: 'gaussian' std: 0.01 } } }
+layer { name: 'relu_cls_1' type: 'ReLU' bottom: 'cls_1' top: 'cls_1' }
+layer { name: 'dropout_cls_1' type: 'Dropout' bottom: 'cls_1' top: 'cls_1' dropout_param { dropout_ratio: 0.5 } }
+
+
+layer { name: 'cls_2' type: 'InnerProduct' bottom: 'cls_1' top: 'cls_2'
+  param { lr_mult: 1.0 } param { lr_mult: 1.0 }
+  inner_product_param { num_output: 1024 weight_filler: { type: 'gaussian' std: 0.01 } } }
+layer { name: 'relu_cls_2' type: 'ReLU' bottom: 'cls_2' top: 'cls_2' }
+
+########## cls score ##########
+
+layer { name: 'obj_score' type: 'InnerProduct' bottom: 'cls_2' top: 'obj_score' 
+  inner_product_param { num_output: 1 weight_filler { type: "gaussian" std: 0.001 } bias_filler { type: "constant" std: 0 } } }
+layer { name: "obj_reshape" type: "Reshape" bottom: "obj_score" top: "obj_score_reshape" 
+  reshape_param { shape { dim: -1 dim: 1 dim: 1 dim: 1 } } }
+
+layer { name: 'sig_score' type: 'Sigmoid' bottom: 'obj_score' top: 'objn_old' }
+
+layer { name: "top_k" type: "DummyData" top: "k" dummy_data_param { shape { dim: 100 dim: 1 dim: 1 dim: 1} } }
+
+layer { name: "batch_filter" type: "TopK" bottom: "sample_s" bottom: "objn" bottom: "k" top: "filted_sample" top: "top_k" }
+
+########## att branch ##########
+layer { name: 'att' type: 'InnerProduct' bottom: 'filted_sample' top: 'flatten_att'
+  param { lr_mult: 1.0 } param { lr_mult: 2.0 }
+  inner_product_param { num_output: 16 weight_filler: { type: 'gaussian' std: 0.0001 } bias_filler { type: 'constant' value: 0 } } }
+
+layer {
+  name: "atts_reshape" type: "Reshape" bottom: "flatten_att" top: "atts"
+  reshape_param { shape { dim: -1 dim: 1 dim: 4, dim: 4 } }
+}
+
+
+########## att score ###########
+
+#layer { name: "loss_att" type: "NormalizedSigmoidCrossEntropyLoss" bottom: "atts" bottom: "att" propagate_down: true propagate_down: false top: "loss_atts" loss_weight: 1}
+######### att filter ###########
+layer { name: 'att_sigmoid' type: 'Sigmoid' bottom: 'atts' top: 'sig_atts' }
+layer { name: 'att_filt' type: 'TileProduct' bottom: 'filted_sample' bottom: 'sig_atts' top: 'atts_filt_feat' }
+
+########## seg branch ##########
+
+layer { name: 'seg_1' type: 'InnerProduct' bottom: 'atts_filt_feat' top: 'seg_1'
+    param { lr_mult: 1.0 }
+    inner_product_param { num_output: 512 weight_filler: { type: 'gaussian' std: 0.001 } bias_term: false } } 
+
+layer { bottom: "seg_1" top: "seg_1" type: "BatchNorm" name:"seg_1_bn" batch_norm_param { use_global_stats: true } 
+  param { lr_mult: 0 decay_mult: 0 } param { lr_mult: 0 decay_mult: 0 } param { lr_mult: 0 decay_mult: 0 } }
+layer { bottom: "seg_1" top: "seg_1" type: "Scale" name: "seg_1_scale" scale_param { bias_term: true } 
+  param { lr_mult: 1 decay_mult: 0 } param { lr_mult: 1 decay_mult: 0} }
+
+layer { name: 'seg_2' type: 'InnerProduct' bottom: 'seg_1' top: 'seg_2'
+  param { lr_mult: 1.0 } param { lr_mult: 1.0 }
+  inner_product_param { num_output: 400 weight_filler: { type: 'gaussian' std: 0.001 } bias_filler { type: 'constant' value: 0 } } }
+
+########## seg score ##########
+layer { name: 'mask_reshape' type: 'Reshape' bottom: 'seg_2' top: 'seg_mask'
+  reshape_param { shape { dim: -1 dim: 1 dim: 20 dim: 20 } } }
+
+layer { name: 'upscore' type: "Deconvolution" bottom: "seg_mask" top: "seg_mask_up" param { lr_mult: 0 }
+  convolution_param { num_output: 1 bias_term: false kernel_size: 8 stride: 4 } }
+
+#layer { name: "reshape" type: "Reshape" bottom: "seg" top: "gt_masks_reshape" reshape_param { shape { dim: -1 dim: 1 dim: 80 dim: 80 } } }
+layer { name: "mask_shape" type: "DummyData" top: "mask_shape" dummy_data_param { shape { dim: 1 dim: 1 dim: 80 dim: 80 } } }
+
+layer { name: "crop" type: "Crop" bottom: "seg_mask_up" bottom: "mask_shape" top: "seg_mask_crop" crop_param { axis: 2 offset: 2 } }
+
+layer { name: 'seg' type: 'Sigmoid' bottom: 'seg_mask_crop' top: 'masks' }
+#layer { name: 'loss_seg' type: 'NormalizedSigmoidCrossEntropyLoss' bottom: 'seg_mask_crop' bottom: 'gt_masks_reshape' propagate_down: true propagate_down: false top: 'loss_mask' loss_weight: 1}
+
+

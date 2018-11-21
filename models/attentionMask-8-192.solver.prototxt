@@ -1,0 +1,18 @@
+#Modified version of the original code from Hu et al.
+#
+#@author Hu et al.
+#@author Christian Wilms
+#@date 11/15/18
+
+train_net: "models/attentionMask-8-192.train.prototxt"
+base_lr: .0001
+lr_policy: "step"
+gamma: 0.1
+stepsize: 4000000
+display: 7999
+average_loss: 79999
+momentum: 0.9
+weight_decay: 0.00005
+snapshot: 80000
+# We still use the snapshot prefix, though
+snapshot_prefix: "params/attentionMask-8-192"

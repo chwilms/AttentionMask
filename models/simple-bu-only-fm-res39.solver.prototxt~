@@ -1,0 +1,13 @@
+train_net: "/informatik2/cv/home/wilms/Documents/workspace/FastMask/models/simple-bu-only-fm-res39.train.prototxt"
+base_lr: 0.01
+lr_policy: "step"
+gamma: 0.1
+stepsize: 500000
+display: 1
+average_loss: 128
+momentum: 0.9
+weight_decay: 0.00005
+snapshot: 10000
+max_iter: 350000
+# We still use the snapshot prefix, though
+snapshot_prefix: "/informatik2/cv/home/wilms/Documents/workspace/FastMask/params/simple-bu-only-fm-res39"

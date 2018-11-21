@@ -1,0 +1,21 @@
+name: 'Single Shot Mask - ResNet 50'
+
+layer {
+  name: "data"
+  type: "Input"
+  top: "data"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 224
+      dim: 224
+    }
+  }
+}
+
+layer {
+  name: "silence_layer"
+  type: "Silence"
+  bottom: "data"
+}

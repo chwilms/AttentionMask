@@ -1,0 +1,22 @@
+{
+  "RGB_MEAN": [123.68, 116.779, 103.939],
+  "ATTENTION": {
+    "KERNELS": [
+      [1, 0.2, 0.1, 0, 0, 0],
+      [0.2, 1, 0.2, 0.1, 0, 0],
+      [0.1, 0.2, 1, 0.2, 0.1, 0],
+      [0, 0.1, 0.2, 1, 0.2, 0.1],
+      [0, 0, 0.1, 0.2, 1, 0.2],
+      [0, 0, 0, 0.1, 0.2, 1]
+    ],
+    "AREA_GT": [0, 50, 400, 120, 600, 10000],
+    "AREA_LT": [50, 400, 120, 600, 10000, 1e9]
+  },
+  "MAX_SIDE": 600.0,
+  "IMAGE_PATH_FORMAT": "data/coco/images/%s/%s",
+  "IMAGE_NAME_FORMAT": "COCO_%s_%012d.jpg",
+  "IMAGE_SET": "val2014",
+  "ANNOTATION_TYPE": "minival2014",
+  "ANNOTATION_FILE_FORMAT": "data/coco/annotations/instances_%s.json"
+}
+
