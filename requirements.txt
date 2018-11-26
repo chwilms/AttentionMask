@@ -2,4 +2,4 @@ scipy==1.1.0
 numpy==1.15.1
 python-cjson==1.2.1
 setproctitle==1.1.10
-scikit-image=0.13.1
+scikit-image==0.13.1
