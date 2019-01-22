@@ -99,7 +99,7 @@ There are two options for inference. You can either generate proposals for the C
 For inference on the COCO dataset, use the `testAttentionMask.py` script with the gpu id, the model name, the weights and the dataset you want to test on (e.g., val2014):
 
 ```
-$ python testAttentionMask.py 0 attentionMask-8-128 --init_weights attentionMask-8-128_final.caffemodel --dataset val2014 --end 5000
+$ python testAttentionMask.py 0 attentionMask-8-128 --init_weights attentionmask-8-128final.caffemodel --dataset val2014 --end 5000
 ```
 
 By default, only the first 5000 images of a dataset are used.
@@ -108,7 +108,7 @@ By default, only the first 5000 images of a dataset are used.
 If you want to test AttentionMask on one of your images, call the `demo.py` script with the path to your image, the gpu id, the model name and the weights:
 
 ```
-$ python demo.py 0 attentionMask-8-128 <your image path here> --init_weights=attentionMask-8-128_final.caffemodel
+$ python demo.py 0 attentionMask-8-128 <your image path here> --init_weights=attentionmask-8-128final.caffemodel
 ```
 
 As a result you get an image with the best 20 proposals as overlays. If you want to dive deeper into the set of proposals, you can store them all using the `ret_masks` variable in the script with the `ret_scores` variable for the objectness scores.
