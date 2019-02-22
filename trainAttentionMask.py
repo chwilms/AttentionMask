@@ -44,6 +44,7 @@ if __name__ == '__main__':
     args = parse_args()
 
     config.model = args.model
+    config.steps = args.step
     config.solver_prototxt = args.model + '.solver.prototxt'
     if os.path.exists("configs/%s.json" % config.model):
         load_config("configs/%s.json" % config.model)
