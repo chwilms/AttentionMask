@@ -22,6 +22,7 @@ import multiprocessing
 from Queue import Empty
 
 from config import *
+import config
 from alchemy.datasets.coco import COCO_DS
 
 from pycocotools.mask import frPyObjects
@@ -186,7 +187,7 @@ class BoxSelectionLayer(caffe.Layer):
         top[4].data[...] = self.item[self.MASK_FILTER]
         
         #properly terminate the sub processes, once an epoch is finished
-        if self.iterations == 80000:
+        if self.iterations == config.steps:
             for _ in range(self.process_num):
                 self.processes[_].terminate()
             self.process.terminate()
