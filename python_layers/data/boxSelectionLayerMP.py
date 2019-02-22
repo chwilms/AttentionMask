@@ -204,8 +204,7 @@ class BoxSelectionLayer(caffe.Layer):
         
         self.image_path = item.image_path
         self.anns = item.imgToAnns
-        self.id = int(self.image_path.split('_')[-1].split('.')[0])
-        batch = {'id':i}
+        batch = {}
         batch.update(self.fetch_image())
         self.fetch_masks()
         self.cal_centers_of_masks_and_bbs()
