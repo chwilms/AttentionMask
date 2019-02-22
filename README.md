@@ -140,5 +140,5 @@ If you want to change the dataset form COCO to something else you have to follow
 
 4. The solver (`models/*.solver.prototxt`) has to be adapted if the dataset is of different length than COCO. Change snapshot, display and average_loss according to the number of images in your dataset.
 
-5. Change the value of the step parameter when calling the training script to the number of images in your dataset.
+5. Change the value of the `--step` parameter when calling the training script to the number of images in your dataset.
 
