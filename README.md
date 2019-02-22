@@ -128,3 +128,17 @@ To train AttentionMask on a dataset, you can use the `train.sh` script. It itera
 $ export EPOCH=1
 $ ./train.sh
 ```
+
+### Training on your own dataset
+If you want to change the dataset form COCO to something else you have to follow the subsequent steps.
+
+1. You have to provide the annotations in COCO-style. COCO-style means the annotation file has to be a json file similar to the COCO annotations. There are many tools on the web to change or create annotations accordingly.
+
+2. Change the `shuffledData.txt`. The only purpose of this file is to keep the data preprocessing in the data layer and the box selection layer in sync (loading the identical image, determining if the image should be flipped or slightly zoomed). Therefore this file keeps a randomly shuffled list of all indices of the dataset. In case of COCO dataset it is a list of numbers from 0 to 82080 (82081 images in training set). Additionally for each number there is a random flag (0 or 1) for horizontally flipping the image for training as well as a number between 0 and 69 as a tiny zoom. Tiny zoom is a small number that is added on top of the max edge length to get some more variety in image sizes (check `fetch()` and `fetch_image()` in `base_coco_ssm_spider.py` or `boxSelectionLayerMP.py` for details). All three values are separated by a semicolon and each line has one entry.
+
+3. In `config.py` adjust `ANNOTATION_TYPE` and `IMAGE_SET` according to your new dataset. Furthermore, you may have to adjust `ANNOTATION_FILE_FORMAT` for the path to the annotations or `IMAGE_PATH_FORMAT` for the path to the images. The image format strings are used in `alchemy/data/coco.py` for locating the images. Changes may have to be applied there as well, e.g., if the image file name does not start with the dataset name.
+
+4. The solver (`models/*.solver.prototxt`) has to be adapted if the dataset is of different length than COCO. Change snapshot, display and average_loss according to the number of images in your dataset.
+
+5. Change the value of the step parameter when calling the training script to the number of images in your dataset.
+
