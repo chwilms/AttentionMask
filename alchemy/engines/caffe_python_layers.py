@@ -9,6 +9,7 @@ Modified version of the original code from Hu et al.
 import multiprocessing
 import time
 import caffe
+import config
 
 from Queue import Empty
 
@@ -77,7 +78,7 @@ class AlchemyDataLayer(caffe.Layer):
         for i in range(len(item)):
             top[i].data[...] = item[i]
         #properly terminate the sub process, once an epoch is finished
-        if self.iterations == 80000:
+        if self.iterations == config.steps:
             self.process.terminate()
 
     def backward(self, bottom, propagate_down, top):
