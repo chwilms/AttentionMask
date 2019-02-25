@@ -142,3 +142,27 @@ If you want to change the dataset form COCO to something else you have to follow
 
 5. Change the value of the `--step` parameter when calling the training script to the number of images in your dataset.
 
+## Speed up training or testing / Decrease network size
+To speed up the training or testing phase as well as decreasing the network's memory footprint, removing one or multiple scales is the straightforward solution. However, this comes at the cost of (slightly) decreased performance in terms of AR. Usually removing scales `24`, `48` and `96` results only in little changes in terms of AR. Removing scale `8` on the other hand results in large gains in terms of speed up and memory footprint, however, decreases the performance on small objects significantly. For removing one or multiple scales follow the subsequent steps.
+
+### Testing
+Usually it is no problem to test with fewer scales than you used for training. We will show here how to remove scale `128` from `myModel`. Removing other scales works accordingly.
+
+1. From the `configs/myModel.json` file remove `128` from the list `RFs`.
+2. In the `models/myModel.test.prototxt` remove the following elements: 
+   1. Remove `top: "sample_128"` from `sample_concat layer`.
+   2. Remove the `layers extractor_128` and `conv_feat_1_128s`.
+   3. Remove `top: "obj128_flags"` and `bottom: "obj128_checked"` from the `SplitIndices` layer.
+   4. Remove `bottom: "obj128_checked"` and `bottom: "nonObj128_checked"` from `concatFlattendObj` and `concatFlattendNonObj` layer, respectively.
+   5. Remove the entire `objectness attention at scale 128` block. This step is not necessary for scale `8`, scale `16` and scale `24`.
+   6. Remove the entire `shared neck at scale 128` block. This step is only necessary, if you remove a final scale from one of the branches (e.g. scale `96` or scale `128` from `attentionMask-8-128`). This step is not necessary for scale `8`, scale `16` and scale `24`.
+
+### Training
+1. Follow the instructions for testing.
+2. Remove all elements in the `models/myModel.train.prototxt` file that have been removed from the `models/myModel.test.prototx` file.
+3. Furthermore, remove `top: "objAttMask_128"` and `top: "objAttMask_128_org"` from the `data` layer.
+4. Remove `128` from the `attr` in `coco/coco_ssm_spider.py`.
+
+### Removing an entire branch
+
+If you remove scales `24`, `48`, `96`(, `192`), you can also remove the `div3 branch` from the base net (layers marked with `_div3`).
