@@ -3499,7 +3499,7 @@ layer {
 
 
 
-########## shared deep_mask feature on VGG16 48s ##########
+########## shared neck at scale 48 ##########
 
 layer { name: "conv5_4_div3" type:"Convolution" bottom: "res4f_div3" top: "conv5_4_div3"
   param { name: 'rnn_conv_1_weight' lr_mult: 10} param { name: 'rnn_conv_1_bias' lr_mult: 20}
@@ -3523,7 +3523,7 @@ layer { name: "sum_48s" type: "Eltwise" bottom: "pool5a_div3" bottom: "pool5b_di
 layer { name: "sum_48s_relu" type: "ReLU" bottom: "sum_48s" top: "sum_48s" }
 
 
-########## shared deep_mask feature on VGG16 96s ##########
+########## shared neck at scale 96 ##########
 
 layer { name: "conv6_4_div3" type:"Convolution" bottom: "sum_48s" top: "conv6_4_div3"
   param { name: 'rnn_conv_1_weight' lr_mult: 10} param { name: 'rnn_conv_1_bias' lr_mult: 20}
@@ -3546,7 +3546,7 @@ layer { name: "pool6a_div3" type:"Pooling" bottom: "sum_48s" top: "pool6a_div3"
 layer { name: "sum_96s" type: "Eltwise" bottom: "pool6a_div3" bottom: "pool6b_div3" top: "sum_96s" }
 layer { name: "sum_96s_relu" type: "ReLU" bottom: "sum_96s" top: "sum_96s" }
 
-########## shared deep_mask feature on VGG16 32s ##########
+########## shared neck at scale 32 ##########
 
 layer { name: "conv5_4" type:"Convolution" bottom: "res4f" top: "conv5_4"
   param { name: 'rnn_conv_1_weight' lr_mult: 10} param { name: 'rnn_conv_1_bias' lr_mult: 20}
@@ -3569,7 +3569,7 @@ layer { name: "pool5a" type: "Pooling" bottom: "res4f" top: "pool5a"
 layer { name: "sum_32s" type: "Eltwise" bottom: "pool5a" bottom: "pool5b" top: "sum_32s" }
 layer { name: "sum_32s_relu" type: "ReLU" bottom: "sum_32s" top: "sum_32s" }
 
-########## shared deep_mask feature on VGG16 64s ##########
+########## shared neck at scale 64 ##########
 
 layer { name: "conv6_4" type:"Convolution" bottom: "sum_32s" top: "conv6_4"
   param { name: 'rnn_conv_1_weight' lr_mult: 10} param { name: 'rnn_conv_1_bias' lr_mult: 20}
@@ -3592,7 +3592,7 @@ layer { name: "pool6a" type: "Pooling" bottom: "sum_32s" top: "pool6a"
 layer { name: "sum_64s" type: "Eltwise" bottom: "pool6a" bottom: "pool6b" top: "sum_64s" }
 layer { name: "sum_64s_relu" type: "ReLU" bottom: "sum_64s" top: "sum_64s" }
 
-########## shared deep_mask feature on VGG16 128s ##########
+########## shared neck at scale 128 ##########
 
 layer { name: "conv7_4" type:"Convolution" bottom: "sum_64s" top: "conv7_4"
   param { name: 'rnn_conv_1_weight' lr_mult: 10} param { name: 'rnn_conv_1_bias' lr_mult: 20}
