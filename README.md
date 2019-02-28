@@ -27,6 +27,12 @@ year = {2018}
 - Caffe (already part of this git)
 - [Alchemy](https://github.com/voidrank/alchemy) (already part of this git)
 
+# Hardware specifications
+For the results in the paper we used the following hardware:
+- Intel i7-5930K 6 core CPU
+- 32 GB RAM
+- GTX Titan X GPU with 12 GB RAM
+
 # Installation
 We assume Ubuntu 16.04 with Cuda 9.0, Python 2.7 and pip already installed
 
