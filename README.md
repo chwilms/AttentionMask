@@ -148,6 +148,8 @@ If you want to change the dataset form COCO to something else you have to follow
 
 5. Change the value of the `--step` parameter when calling the training script to the number of images in your dataset.
 
+6. For inference, you may have to change the extraction of `image_id` in the `testAttentionMask.py` script according to the image IDs in your dataset.
+
 ## Speed up training or testing / Decrease network size
 To speed up the training or testing phase as well as decreasing the network's memory footprint, removing one or multiple scales is the straightforward solution. However, this comes at the cost of (slightly) decreased performance in terms of AR. Usually removing scales `24`, `48` and `96` results only in little changes in terms of AR. Removing scale `8` on the other hand results in large gains in terms of speed up and memory footprint, however, decreases the performance on small objects significantly. For removing one or multiple scales follow the subsequent steps.
 
