@@ -22,7 +22,6 @@ template <typename Dtype>
 void ReLULayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down,
     const vector<Blob<Dtype>*>& bottom) {
-std::cout<<"Hello from backward reluLayer\n";
   if (propagate_down[0]) {
     const Dtype* bottom_data = bottom[0]->cpu_data();
     const Dtype* top_diff = top[0]->cpu_diff();
