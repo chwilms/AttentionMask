@@ -3612,7 +3612,7 @@ layer { name: "relu_buAttSize1a_8" type: "ReLU" bottom: "res_buAttSize1a_8" top:
 
 layer {  name: "res_buAttSize1b_8"  type: "Convolution"  bottom: "res_buAttSize1a_8"  top: "res_buAttSize1b_8"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_8" type: "Softmax" bottom: "res_buAttSize1b_8" top: "finalAtt8" }
@@ -3677,7 +3677,7 @@ layer { name: "relu_buAttSize1a_16" type: "ReLU" bottom: "res_buAttSize1a_16" to
 
 layer {  name: "res_buAttSize1b_16"  type: "Convolution"  bottom: "res_buAttSize1a_16"  top: "res_buAttSize1b_16"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_16" type: "Softmax" bottom: "res_buAttSize1b_16" top: "finalAtt16" }
@@ -3740,7 +3740,7 @@ layer { name: "relu_buAttSize1a_24" type: "ReLU" bottom: "res_buAttSize1a_24" to
 
 layer {  name: "res_buAttSize1b_24"  type: "Convolution"  bottom: "res_buAttSize1a_24"  top: "res_buAttSize1b_24"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_24" type: "Softmax" bottom: "res_buAttSize1b_24" top: "finalAtt24" }
@@ -3804,7 +3804,7 @@ layer { name: "relu_buAttSize1a_32" type: "ReLU" bottom: "res_buAttSize1a_32" to
 
 layer {  name: "res_buAttSize1b_32"  type: "Convolution"  bottom: "res_buAttSize1a_32"  top: "res_buAttSize1b_32"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_32" type: "Softmax" bottom: "res_buAttSize1b_32" top: "finalAtt32" }
@@ -3868,7 +3868,7 @@ layer { name: "relu_buAttSize1a_48" type: "ReLU" bottom: "res_buAttSize1a_48" to
 
 layer {  name: "res_buAttSize1b_48"  type: "Convolution"  bottom: "res_buAttSize1a_48"  top: "res_buAttSize1b_48"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_48" type: "Softmax" bottom: "res_buAttSize1b_48" top: "finalAtt48" }
@@ -3932,7 +3932,7 @@ layer { name: "relu_buAttSize1a_64" type: "ReLU" bottom: "res_buAttSize1a_64" to
 
 layer {  name: "res_buAttSize1b_64"  type: "Convolution"  bottom: "res_buAttSize1a_64"  top: "res_buAttSize1b_64"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_64" type: "Softmax" bottom: "res_buAttSize1b_64" top: "finalAtt64" }
@@ -3996,7 +3996,7 @@ layer { name: "relu_buAttSize1a_96" type: "ReLU" bottom: "res_buAttSize1a_96" to
 
 layer {  name: "res_buAttSize1b_96"  type: "Convolution"  bottom: "res_buAttSize1a_96"  top: "res_buAttSize1b_96"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_96" type: "Softmax" bottom: "res_buAttSize1b_96" top: "finalAtt96" }
@@ -4060,7 +4060,7 @@ layer { name: "relu_buAttSize1a_128" type: "ReLU" bottom: "res_buAttSize1a_128" 
 
 layer {  name: "res_buAttSize1b_128"  type: "Convolution"  bottom: "res_buAttSize1a_128"  top: "res_buAttSize1b_128"
   param {    lr_mult: 10    decay_mult: 1  }  param {    lr_mult: 20    decay_mult: 0  }
-  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: .5    }  }
+  convolution_param {  num_output: 2  pad: 2    kernel_size: 4    stride: 1  weight_filler {      type: "gaussian"      std: 0.01    }    bias_filler {      type: "constant"      value: 0.5    }  }
 }
 
 layer { name: "loss_buAttSize_128" type: "Softmax" bottom: "res_buAttSize1b_128" top: "finalAtt128" }
@@ -4305,7 +4305,7 @@ layer { name: 'att' type: 'InnerProduct' bottom: 'filted_sample' top: 'flatten_a
 
 layer {
   name: "atts_reshape" type: "Reshape" bottom: "flatten_att" top: "atts"
-  reshape_param { shape { dim: -1 dim: 1 dim: 10, dim: 10 } }
+  reshape_param { shape { dim: -1 dim: 1 dim: 10 dim: 10 } }
 }
 
 ######### att filter ###########
