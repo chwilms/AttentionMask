@@ -158,7 +158,7 @@ Usually it is no problem to test with fewer scales than you used for training. W
 
 1. From the `configs/myModel.json` file remove `128` from the list `RFs`.
 2. In the `models/myModel.test.prototxt` remove the following elements: 
-   1. Remove `top: "sample_128"` from `sample_concat layer`.
+   1. Remove `bottom: "sample_128"` from `sample_concat layer`.
    2. Remove the `layers extractor_128` and `conv_feat_1_128s`.
    3. Remove `top: "obj128_flags"` and `bottom: "obj128_checked"` from the `SplitIndices` layer.
    4. Remove `bottom: "obj128_checked"` and `bottom: "nonObj128_checked"` from `concatFlattendObj` and `concatFlattendNonObj` layer, respectively.
