@@ -49,7 +49,7 @@ class AlchemyDataLayer(caffe.Layer):
                     continue
                 for attr_name in spider.attr:
                     item.append(item_dict[attr_name])
-                self.q2.put([index,i,item], True) # send pre-processed datat back to master
+                self.q2.put([index,i,item], True) # send pre-processed data back to master
             except Empty:
                 pass
 
