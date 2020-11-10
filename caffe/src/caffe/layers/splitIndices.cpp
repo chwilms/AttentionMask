@@ -46,13 +46,13 @@ namespace caffe {
       memcpy(top_data, &bottom_data[startIndex] , sizeof(Dtype) * feld[i]);
       startIndex+=feld[i];
     }
-    for (int ii = 0; ii< 4; ++ii){
-      const Dtype* top_data = top[ii]->cpu_data();
-      int summe = 0;
-      for (int i = 0; i < top[ii]->shape(3); ++i){
-        summe+=top_data[i];
-      }
-    }
+//    for (int ii = 0; ii< 4; ++ii){
+//      const Dtype* top_data = top[ii]->cpu_data();
+//      int summe = 0;
+//      for (int i = 0; i < top[ii]->shape(3); ++i){
+//        summe+=top_data[i];
+//    }
+//  }
   }
 
   template <typename Dtype>
