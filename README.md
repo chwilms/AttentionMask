@@ -177,5 +177,5 @@ If you remove scales `24`, `48`, `96`(, `192`), you can also remove the `div3 br
 
 # FAQs
 
-### Problem A
-Solution
+### I'm getting `Check failed: error == cudaSuccess (4 vs. 0)  driver shutting down` at the end of executing AttentionMask
+Most likely, everything is just fine. You can ignore the error. Check, if a json-file with your chosen model name was created in the `results` subdirectory in case you ran `testAttentionMask.py`. The model name is the second parameter in `testAttentionMask.py`.
