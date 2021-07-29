@@ -174,3 +174,8 @@ Usually it is no problem to test with fewer scales than you used for training. W
 ### Removing an entire branch
 
 If you remove scales `24`, `48`, `96`(, `192`), you can also remove the `div3 branch` from the base net (layers marked with `_div3`).
+
+# FAQs
+
+### Problem A
+Solution
