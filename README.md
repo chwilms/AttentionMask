@@ -167,7 +167,7 @@ Usually it is no problem to test with fewer scales than you used for training. W
 
 ### Training
 1. Follow the instructions for testing.
-2. Remove all elements in the `models/myModel.train.prototxt` file that have been removed from the `models/myModel.test.prototx` file.
+2. Remove all elements in the `models/myModel.train.prototxt` file that have been removed from the `models/myModel.test.prototxt` file.
 3. Furthermore, remove `top: "objAttMask_128"` and `top: "objAttMask_128_org"` from the `data` layer.
 4. Remove `128` from the `attr` in `spider/coco_ssm_spider.py`.
 
