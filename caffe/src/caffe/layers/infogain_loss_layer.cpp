@@ -148,7 +148,7 @@ void InfogainLossLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
         continue;
       }
       DCHECK_GE(label_value, 0);
-      DCHECK_LT(label_value, num_labels_);
+      //DCHECK_LT(label_value, num_labels_);
       for (int l = 0; l < num_labels_; l++) {
         loss -= infogain_mat[label_value * num_labels_ + l] *
           log(std::max(
@@ -196,7 +196,7 @@ void InfogainLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
         const int label_value =
           static_cast<int>(bottom_label[i * inner_num_ + j]);
         DCHECK_GE(label_value, 0);
-        DCHECK_LT(label_value, num_labels_);
+        //DCHECK_LT(label_value, num_labels_);
         if (has_ignore_label_ && label_value == ignore_label_) {
           for (int l = 0; l < num_labels_; ++l) {
             bottom_diff[i * dim + l * inner_num_ + j] = 0;
