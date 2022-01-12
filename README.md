@@ -13,7 +13,7 @@ If you find this software useful in your research, please cite our paper.
 @inproceedings{WilmsFrintropACCV2018,
 title = {{AttentionMask}: Attentive, Efficient Object Proposal Generation Focusing on Small Objects},
 author = {Christian Wilms and Simone Frintrop},
-booktitle = {Asien Conference on Computer Vision (ACCV)},
+booktitle = {Asian Conference on Computer Vision (ACCV)},
 year = {2018}
 }
 ```
