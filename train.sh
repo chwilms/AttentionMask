@@ -8,7 +8,7 @@ do
     if [[ $EPOCH -eq 1 ]]
     then
         let STEP=EPOCH*SIZE_EPOCH
-        python trainAttentionMask.py 0 attentionMask-8-128 --init_weights ResNet-50-model.caffemodel --step $SIZE_EPOCH
+        python trainAttentionMask.py 0 attentionMask-8-128 --init_weights resnet-50-model.caffemodel --step $SIZE_EPOCH
     else
         let STEP_OLD=(EPOCH-1)*SIZE_EPOCH
         let STEP=EPOCH*SIZE_EPOCH
